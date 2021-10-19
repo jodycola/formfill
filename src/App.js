@@ -13,6 +13,13 @@ function App() {
   function handleSubmit(e){
     e.preventDefault();
     console.log(form);
+    fetch("https://nifty-panini-d08aa7.netlify.app/post", {
+      method: "POST",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+    })
   }
 
   return (
