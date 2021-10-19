@@ -13,13 +13,22 @@ function App() {
   function handleSubmit(e){
     e.preventDefault();
     console.log(form);
-    fetch("http://localhost:3000/submit", {
+    fetch("http://localhost:3000/", {
       method: "POST",
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
       },
       body: JSON.stringify(form),
+    })
+    .then(res => res.json())
+    .then(data => {
+      setForm({
+        first: "",
+        last: "",
+        email: "",
+        company: ""
+      })
     })
   }
 
