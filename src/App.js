@@ -12,7 +12,6 @@ function App() {
   
   function handleSubmit(e){
     e.preventDefault();
-    console.log(form);
     fetch("https://formfilltest.herokuapp.com/", {
       method: "POST",
       headers: {
@@ -34,6 +33,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1> HTML Form </h1>
         <form onSubmit={handleSubmit}>
         <label>First Name </label>
           <input 
@@ -65,7 +65,7 @@ function App() {
           />
 
         <br/>
-        <label>Email </label>
+        <label>Email Address </label>
           <input 
             type="text"
             name="email"
@@ -75,7 +75,7 @@ function App() {
           />
 
           <br/>
-          <button type="submit">Translate</button>
+          <button type="submit">Submit</button>
         </form>
     </div>
   );
