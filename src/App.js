@@ -7,7 +7,7 @@ function App() {
   
   function handleSubmit(e){
     e.preventDefault();
-    fetch(`http://localhost:3000/query/${query}`, {
+    fetch(`http://formfilltest.herokuapp.com/query/${query}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
