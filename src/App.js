@@ -3,79 +3,38 @@ import './App.css';
 
 function App() {
 
-  const [form, setForm] = useState({
-    first: "",
-    last: "",
-    email: "",
-    company: ""
-  })
+  const [query, setQuery] = useState("")
   
   function handleSubmit(e){
     e.preventDefault();
-    fetch("https://formfilltest.herokuapp.com/", {
-      method: "POST",
+    fetch(`http://localhost:3000/query/${query}`, {
+      method: 'POST',
       headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(query),
     })
-    .then(res => res.json())
+    .then(response => response.json())
     .then(data => {
-      setForm({
-        first: "",
-        last: "",
-        email: "",
-        company: ""
-      })
+      console.log('Success:', data);
     })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
 
   return (
     <div className="App">
       <h1> HTML Form </h1>
         <form onSubmit={handleSubmit}>
-        <label>First Name </label>
-          <input 
+        <label>What company are you looking for?</label><br/>
+        <input 
             type="text"
-            name="first"
-            value={form.first}
-            onChange={(e) => setForm({
-                ...form, [e.target.name]: e.target.value})}
-          />
-        
-        <br/>
-        <label>Last Name </label>
-          <input 
-            type="text"
-            name="last"
-            value={form.last}
-            onChange={(e) => setForm({
-                ...form, [e.target.name]: e.target.value})}
-          />
-
-        <br/>
-        <label>Company </label>
-          <input 
-            type="text"
-            name="company"
-            value={form.company}
-            onChange={(e) => setForm({
-                ...form, [e.target.name]: e.target.value})}
-          />
-
-        <br/>
-        <label>Email Address </label>
-          <input 
-            type="text"
-            name="email"
-            value={form.email}
-            onChange={(e) => setForm({
-                ...form, [e.target.name]: e.target.value})}
-          />
-
-          <br/>
-          <button type="submit">Submit</button>
+            name="query"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+        /><button type="submit">Search</button>
         </form>
     </div>
   );
